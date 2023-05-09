@@ -103,6 +103,14 @@ class ResidualAttentionBlock(nn.Module):
 
     def attention(self, x: torch.Tensor, attn_mask: torch.Tensor):
         attn_mask_ = attn_mask.repeat(self.n_head, 1, 1)
+
+        try:
+            x = x.to("cuda")
+            attn_mask = attn_mask.to("cuda")
+        except:
+            pass
+
+        
         return self.attn(x, x, x, need_weights=False, attn_mask=attn_mask_)[0]
 
     def forward(self, para_tuple: tuple):
