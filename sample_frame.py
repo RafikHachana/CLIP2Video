@@ -21,13 +21,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Get frames from video')
     parser.add_argument('--input_path', type=str, default='input', help='input directory of videos')
     parser.add_argument('--output_path', type=str, default='output', help='output directory of sampled frames')
+    parser.add_argument('--single_file', type=bool, default=False, help='Use when dealing with a single file')
     args = parser.parse_args()
 
     if not os.path.exists(args.output_path):
         os.mkdir(args.output_path)
 
-
-    mp4_file = os.listdir(args.input_path)
+    if args.single_file:
+        mp4_file  = [args.input_path]
+    else:
+        mp4_file = os.listdir(args.input_path)
     lines = [(os.path.join(args.input_path, mp4), os.path.join(args.output_path, mp4.split(".")[0])) for mp4 in mp4_file]
 
     # multi thread

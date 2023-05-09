@@ -2,5 +2,5 @@ ftfy
 regex
 opencv-python
 pandas
-torchvision==0.8.2
-torch==1.7.1
+torchvision==0.12.0
+torch==1.11.0
