@@ -106,9 +106,9 @@ class ResidualAttentionBlock(nn.Module):
 
         try:
             x = x.to("cuda")
-            attn_mask = attn_mask.to("cuda")
-        except:
-            pass
+            attn_mask = attn_mask_.to("cuda")
+        except Exception as e:
+            print(f"{e}: Could not move attention input to CUDA")
 
         
         return self.attn(x, x, x, need_weights=False, attn_mask=attn_mask_)[0]
